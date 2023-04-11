@@ -9,13 +9,16 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DogBreedsViewModel @Inject constructor() : ViewModel() {
+class DogBreedsViewModel @Inject constructor(
+    private val dogRepository: DogRepository
+) : ViewModel() {
 
     val dogBreedLiveData = MutableLiveData<List<String>>()
 
+
     fun getAllDogBreeds() {
         viewModelScope.launch(Dispatchers.IO) {
-            val dogRepository = DogRepository()
+
             val dogBreeds = dogRepository.getDogBreed()?.message
             val breedsList = mutableListOf<String>()
 

@@ -42,6 +42,7 @@ fun RandomImageView(
                 contentDescription = null,
                 modifier = Modifier.size(128.dp)
             )
+
             Button(
                 onClick = {
                     randomDogImageViewModel.getRondomDogImageUrl()
