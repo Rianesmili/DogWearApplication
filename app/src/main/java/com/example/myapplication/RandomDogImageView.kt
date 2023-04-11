@@ -44,7 +44,7 @@ fun RandomImageView(
             )
             Button(
                 onClick = {
-
+                    randomDogImageViewModel.getRondomDogImageUrl()
                 },
                 colors = ButtonDefaults.buttonColors(Color.Black),
                 modifier = Modifier.padding(vertical = 8.dp)
