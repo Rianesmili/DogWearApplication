@@ -1,12 +1,11 @@
 package com.example.myapplication
 
-import com.example.webService.Authors
+import com.example.webService.BookAuthors
 import com.example.webService.BookApi
+import javax.inject.Inject
 
-class BookRepository (private val bookApi: BookApi) {
+class BookRepository @Inject constructor (private val bookApi: BookApi) {
 
-    fun getAuthors() : Authors? {
-        return bookApi.getAllAuthors().execute().body()
-    }
+    fun getAuthors(): BookAuthors? = bookApi.getAllAuthors().execute().body()
 
 }

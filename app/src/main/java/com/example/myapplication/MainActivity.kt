@@ -16,8 +16,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            /*
             navController = rememberNavController()
             SetupNavGraph(navController = navController)
+             */
+            AuthorsListView()
         }
 
     }

@@ -6,5 +6,5 @@ import retrofit2.http.GET
 interface BookApi {
 
     @GET("author")
-    fun getAllAuthors(): Call<Authors>
+    fun getAllAuthors(): Call<BookAuthors>
 }
