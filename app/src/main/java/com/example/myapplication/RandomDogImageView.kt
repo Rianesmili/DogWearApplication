@@ -47,9 +47,17 @@ fun RandomImageView(
                     randomDogImageViewModel.getRondomDogImageUrl()
                 },
                 colors = ButtonDefaults.buttonColors(Color.Black),
-                modifier = Modifier.padding(vertical = 8.dp)
+                modifier = Modifier.padding(vertical = 5.dp)
             ) {
                 Text(text = "Another One", color = Color.White)
+            }
+            Button(onClick = {
+                navController.popBackStack()
+            },
+                colors = ButtonDefaults.buttonColors(Color.Red),
+                modifier = Modifier.padding(vertical = 4.dp)
+            ) {
+                Text(text = "Back", color = Color.White)
             }
         }
     }
