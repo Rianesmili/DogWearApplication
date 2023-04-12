@@ -11,7 +11,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.myapplication"
+        applicationId "com.example.bookmobileapp"
         minSdk 30
         targetSdk 33
         versionCode 1
@@ -80,5 +80,8 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.44.2"
     kapt "com.google.dagger:hilt-android-compiler:2.44"
     implementation 'androidx.hilt:hilt-navigation-compose:1.1.0-alpha01'
+    //L'API Wearable Data Layer
+    implementation 'com.google.android.gms:play-services-wearable:18.0.0'
+
 
 }

@@ -16,8 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.rememberScalingLazyListState
+import com.example.myapplication.Screen.SEND_AUTHOR_TO_WEAR_KEY
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -47,6 +50,11 @@ fun AuthorsListView(authorsListViewModel: AuthorsListViewModel = hiltViewModel()
                         .width(140.dp)
                         .padding(top = 10.dp),
                     onClick = {
+                        val authorName = authorList[index]
+
+                        authorsListViewModel.viewModelScope.launch {
+                            authorsListViewModel.wearToPhoneCommunicator.sendMessageToMobile(SEND_AUTHOR_TO_WEAR_KEY, authorName.toByteArray())
+                        }
 
                     }
                 ) {

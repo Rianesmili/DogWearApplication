@@ -6,4 +6,5 @@ object Screen{
     const val BREED_ROUTE_KEY = "breed"
     const val IMAGE_BY_BREED_ROUTE = "$BASE_IMAGE_BY_BREED_ROUTE{$BREED_ROUTE_KEY}"
     const val RANDOM_DOG_IMAGE_ROUTE = "random_dog_image"
+    const val SEND_AUTHOR_TO_WEAR_KEY = "/selected_author"
 }

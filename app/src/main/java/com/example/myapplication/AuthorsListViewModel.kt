@@ -8,12 +8,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class AuthorsListViewModel @Inject constructor(
-    private val bookRepository: BookRepository
+    private val bookRepository: BookRepository,
+    val wearToPhoneCommunicator: WearToPhoneCommunicator,
 ): ViewModel() {
     val bookAuthorsLiveData = MutableLiveData<List<String>>()
-
 
     fun getAllBookAuthors(){
         viewModelScope.launch(Dispatchers.IO){
@@ -24,4 +25,6 @@ class AuthorsListViewModel @Inject constructor(
 
         }
     }
+
+
 }
