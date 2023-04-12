@@ -36,12 +36,12 @@ object RetrofitModule {
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build()
 
+    @Provides
     fun providesBookApi(@Named("book") retrofit: Retrofit): BookApi {
         return retrofit.create(
             BookApi::class.java
         )
     }
-
 
     @Provides
     fun providesDogApi(@Named("dog")retrofit: Retrofit): DogApi {

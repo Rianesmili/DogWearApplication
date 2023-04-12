@@ -14,12 +14,11 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.rememberScalingLazyListState
-import com.example.webService.BookApi
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

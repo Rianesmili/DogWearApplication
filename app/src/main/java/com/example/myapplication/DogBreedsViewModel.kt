@@ -9,9 +9,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DogBreedsViewModel @Inject constructor(
-    private val dogRepository: DogRepository
-) : ViewModel() {
+class DogBreedsViewModel @Inject constructor(private val dogRepository: DogRepository) : ViewModel() {
 
     val dogBreedLiveData = MutableLiveData<List<String>>()
 
