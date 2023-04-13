@@ -32,36 +32,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
        setContent {
-           hello()
+           AuthorsListView()
         }
     }
 
-    @Composable
-    fun hello(){
 
-        MyApplicationTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-
-                val authorsListViewModel: AuthorsListViewModel = viewModel()
-                broadcastReceiver = object : BroadcastReceiver() {
-                    override fun onReceive(p0: Context?, intent: Intent?) {
-                        if (intent?.action == SEND_AUTHOR_INTENT_ACTION_KEY) {
-                            val author = intent.getStringExtra(SEND_AUTHOR_INTENT_PUT_EXTRA_KEY)
-                            authorsListViewModel.updateAuthor(author.orEmpty())
-                        }
-                    }
-                }
-                registerReceiver(broadcastReceiver, IntentFilter(SEND_AUTHOR_INTENT_ACTION_KEY))
-                val author by authorsListViewModel.authorLiveData.observeAsState()
-                Text(
-                    text = author.orEmpty()
-                )
-            }
-        }
-    }
     override fun onStop() {
         super.onStop()
         unregisterReceiver(broadcastReceiver)

@@ -16,7 +16,7 @@ class AuthorsListViewModel @Inject constructor(
 ) : ViewModel() {
     val bookAuthorsLiveData = MutableLiveData<List<String>>()
 
-    val authorLiveData = MutableLiveData<String>("abc")
+    val authorLiveData = MutableLiveData<String>("Hello There")
 
     fun getAllBookAuthors() {
         viewModelScope.launch(Dispatchers.IO) {
