@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.bookmobileapp
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,11 +12,11 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthorsListViewModel @Inject constructor(
     private val bookRepository: BookRepository,
-    val wearToPhoneCommunicator: WearToPhoneCommunicator,
+    val mobileToPhoneCommunicator: MobileToWearComunicator
 ) : ViewModel() {
-    val bookAuthorsLiveData = MutableLiveData<List<String>>()
 
-    val authorLiveData = MutableLiveData<String>("abc")
+    val authorLiveData = MutableLiveData<String>("Hello")
+    val bookAuthorsLiveData = MutableLiveData<List<String>>()
 
     fun getAllBookAuthors() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -31,8 +31,6 @@ class AuthorsListViewModel @Inject constructor(
     fun updateAuthor (author: String){
         authorLiveData.value = author
     }
-
-
 
 
 }

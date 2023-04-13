@@ -7,4 +7,9 @@ object Screen{
     const val IMAGE_BY_BREED_ROUTE = "$BASE_IMAGE_BY_BREED_ROUTE{$BREED_ROUTE_KEY}"
     const val RANDOM_DOG_IMAGE_ROUTE = "random_dog_image"
     const val SEND_AUTHOR_TO_WEAR_KEY = "/selected_author"
+
+    const val SEND_AUTHOR_INTENT_PUT_EXTRA_KEY = "selected_author_key"
+    const val SEND_AUTHOR_INTENT_ACTION_KEY = "selected_author"
+
+
 }

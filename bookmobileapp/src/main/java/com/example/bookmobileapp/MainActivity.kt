@@ -11,49 +11,59 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.bookmobileapp.Screen.SEND_AUTHOR_INTENT_ACTION_KEY
+import com.example.bookmobileapp.Screen.SEND_AUTHOR_INTENT_PUT_EXTRA_KEY
 import com.example.bookmobileapp.ui.theme.MyApplicationTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    val mainViewModel = MainViewModel()
-
     lateinit var broadcastReceiver: BroadcastReceiver
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        broadcastReceiver = object : BroadcastReceiver() {
-            override fun onReceive(p0: Context?, intent: Intent?) {
-                if (intent?.action == "selected_author") {
-                    val author = intent.getStringExtra("selected_author_key")
-                    mainViewModel.updateAuthor(author.orEmpty())
-                }
-            }
-        }
-        registerReceiver(broadcastReceiver, IntentFilter("selected_author"))
-
-
-        setContent {
-            MyApplicationTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    val author by mainViewModel.authorLiveData.observeAsState()
-                    Text(
-                        text = author.orEmpty()
-                    )
-
-                }
-            }
+       setContent {
+           hello()
         }
     }
 
+    @Composable
+    fun hello(){
+
+        MyApplicationTheme {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
+            ) {
+
+                val authorsListViewModel: AuthorsListViewModel = viewModel()
+                broadcastReceiver = object : BroadcastReceiver() {
+                    override fun onReceive(p0: Context?, intent: Intent?) {
+                        if (intent?.action == SEND_AUTHOR_INTENT_ACTION_KEY) {
+                            val author = intent.getStringExtra(SEND_AUTHOR_INTENT_PUT_EXTRA_KEY)
+                            authorsListViewModel.updateAuthor(author.orEmpty())
+                        }
+                    }
+                }
+                registerReceiver(broadcastReceiver, IntentFilter(SEND_AUTHOR_INTENT_ACTION_KEY))
+                val author by authorsListViewModel.authorLiveData.observeAsState()
+                Text(
+                    text = author.orEmpty()
+                )
+            }
+        }
+    }
     override fun onStop() {
         super.onStop()
-        unregisterReceiver(broadcastReceiver) // Relacher de la mémoir le Receiver important pour les fuite memoir memory leak
+        unregisterReceiver(broadcastReceiver)
     }
 }

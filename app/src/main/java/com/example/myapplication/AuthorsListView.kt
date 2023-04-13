@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Chip
+import androidx.compose.material.Colors
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Surface
 import androidx.compose.material3.Text
@@ -13,10 +14,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.wear.compose.material.MaterialTheme.colors
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.rememberScalingLazyListState
 import com.example.myapplication.Screen.SEND_AUTHOR_TO_WEAR_KEY
@@ -25,7 +28,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AuthorsListView(authorsListViewModel: AuthorsListViewModel = hiltViewModel()){
+fun AuthorsListView(authorsListViewModel: AuthorsListViewModel = hiltViewModel()) {
 
     val authorList by authorsListViewModel.bookAuthorsLiveData.observeAsState(emptyList<String>())
     authorsListViewModel.getAllBookAuthors()
@@ -43,7 +46,7 @@ fun AuthorsListView(authorsListViewModel: AuthorsListViewModel = hiltViewModel()
             ),
             horizontalAlignment = Alignment.CenterHorizontally,
             state = rememberScalingLazyListState() //remember and by
-        ){
+        ) {
             items(authorList.size) { index ->
                 Chip(
                     modifier = Modifier
@@ -53,10 +56,12 @@ fun AuthorsListView(authorsListViewModel: AuthorsListViewModel = hiltViewModel()
                         val authorName = authorList[index]
 
                         authorsListViewModel.viewModelScope.launch {
-                            authorsListViewModel.wearToPhoneCommunicator.sendMessageToMobile(SEND_AUTHOR_TO_WEAR_KEY, authorName.toByteArray())
+                            authorsListViewModel.wearToPhoneCommunicator.sendMessageToMobile(
+                                SEND_AUTHOR_TO_WEAR_KEY,
+                                authorName.toByteArray()
+                            )
                         }
-
-                    }
+                    },
                 ) {
                     Text(
                         text = authorList[index],
