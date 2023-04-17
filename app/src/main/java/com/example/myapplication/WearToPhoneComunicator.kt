@@ -10,6 +10,7 @@ import kotlin.coroutines.resume
 
 class WearToPhoneCommunicator(private val context: Context) {
 
+    // path "ask_send_random_author"
     suspend fun sendMessageToMobile(path: String, data: ByteArray) {
         withContext(Dispatchers.IO) {
             val nodes = suspendCoroutine<List<Node>> { continuation ->

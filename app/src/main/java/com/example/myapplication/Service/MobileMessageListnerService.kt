@@ -9,6 +9,8 @@ import com.google.android.gms.wearable.WearableListenerService
 
 class MobileMessageListnerService : WearableListenerService() {
 
+    //Est executée en permanance, et attend une action particuliére
+    //Son role c'est la recepation de message et pas l'envoie de message, ce service vas servir a la reception depuis le telphone
     override fun onMessageReceived(messageEvent: MessageEvent) {
         super.onMessageReceived(messageEvent)
         if (messageEvent.path == SEND_AUTHOR_TO_WEAR_KEY) {

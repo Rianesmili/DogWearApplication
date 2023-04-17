@@ -7,35 +7,44 @@ import android.content.IntentFilter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Modifier
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.bookmobileapp.Screen.SEND_AUTHOR_INTENT_ACTION_KEY
-import com.example.bookmobileapp.Screen.SEND_AUTHOR_INTENT_PUT_EXTRA_KEY
-import com.example.bookmobileapp.ui.theme.MyApplicationTheme
+import androidx.activity.viewModels
+import com.example.bookmobileapp.Screen.SEND_RANDOM_AUTHOR_ACTION_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     lateinit var broadcastReceiver: BroadcastReceiver
-
+    val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-       setContent {
-           AuthorsListView()
+
+        setContent {
+            AuthorsListView()
         }
+
     }
 
+    override fun onStart() {
+        super.onStart()
+        broadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                if (intent?.action == SEND_RANDOM_AUTHOR_ACTION_KEY) {
+                    viewModel.sendRandomAuthorToWear()
+                }
+            }
+        }
+
+        registerReceiver(broadcastReceiver, IntentFilter(SEND_RANDOM_AUTHOR_ACTION_KEY))
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(broadcastReceiver)
+
+    }
 
     override fun onStop() {
         super.onStop()

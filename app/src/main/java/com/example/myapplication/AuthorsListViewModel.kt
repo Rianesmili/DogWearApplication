@@ -16,7 +16,7 @@ class AuthorsListViewModel @Inject constructor(
 ) : ViewModel() {
     val bookAuthorsLiveData = MutableLiveData<List<String>>()
 
-    val authorLiveData = MutableLiveData<String>("Hello There")
+    val authorLiveData = MutableLiveData<String>("Bonjour TGV InOUI Pro")
 
     fun getAllBookAuthors() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -25,6 +25,11 @@ class AuthorsListViewModel @Inject constructor(
             bookAuthors?.authors?.take(5)
             bookAuthorsLiveData.postValue(bookAuthors?.authors?.take(5) ?: emptyList())
 
+        }
+    }
+    fun askNewRandomAuthor(wearToPhoneCommunicator: WearToPhoneCommunicator){
+        viewModelScope.launch(Dispatchers.IO) {
+            wearToPhoneCommunicator.sendMessageToMobile("ask_send_random_author", byteArrayOf())
         }
     }
 

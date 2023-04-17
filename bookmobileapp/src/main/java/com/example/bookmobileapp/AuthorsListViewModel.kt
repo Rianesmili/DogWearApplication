@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 
 @HiltViewModel
@@ -24,9 +25,9 @@ class AuthorsListViewModel @Inject constructor(
 
             bookAuthors?.authors?.take(5)
             bookAuthorsLiveData.postValue(bookAuthors?.authors?.take(5) ?: emptyList())
-
         }
     }
+
 
     fun updateAuthor (author: String){
         authorLiveData.value = author

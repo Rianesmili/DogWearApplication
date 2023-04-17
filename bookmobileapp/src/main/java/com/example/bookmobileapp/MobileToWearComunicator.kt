@@ -1,6 +1,7 @@
 package com.example.bookmobileapp
 
 import android.content.Context
+import com.example.bookmobileapp.Screen.SEND_AUTHOR_TO_WEAR_KEY
 import com.google.android.gms.wearable.Node
 import com.google.android.gms.wearable.Wearable
 import kotlinx.coroutines.Dispatchers
@@ -8,7 +9,7 @@ import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class MobileToWearComunicator (private val context: Context) {
+class MobileToWearComunicator(private val context: Context) {
 
     suspend fun sendMessageToWear(path: String, data: ByteArray) {
         withContext(Dispatchers.IO) {
@@ -24,4 +25,9 @@ class MobileToWearComunicator (private val context: Context) {
             }
         }
     }
+
+    suspend fun sendAuthorToWear(author: String) {
+        sendMessageToWear(SEND_AUTHOR_TO_WEAR_KEY, author.toByteArray())
+    }
+
 }
