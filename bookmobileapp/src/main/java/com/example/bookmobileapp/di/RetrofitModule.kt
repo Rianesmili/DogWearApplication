@@ -16,7 +16,7 @@ import javax.inject.Named
 object RetrofitModule {
 
 
-    private const val BOOK_BASE_URL = "https://poetrydb.org/"
+    const val BOOK_BASE_URL = "https://poetrydb.org/"
 
 
     @Provides
@@ -29,10 +29,8 @@ object RetrofitModule {
             .build()
 
     @Provides
-    fun providesBookApi(@Named("book") retrofit: Retrofit): BookApi {
-        return retrofit.create(
-            BookApi::class.java
-        )
-    }
+    fun providesBookApi(@Named("book") retrofit: Retrofit): BookApi = retrofit.create(
+        BookApi::class.java
+    )
 
 }

@@ -30,4 +30,8 @@ class MobileToWearComunicator(private val context: Context) {
         sendMessageToWear(SEND_AUTHOR_TO_WEAR_KEY, author.toByteArray())
     }
 
+    suspend fun sendAuthorToWidget(author: String){
+
+    }
+
 }

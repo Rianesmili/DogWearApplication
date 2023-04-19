@@ -9,6 +9,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 @Module
@@ -16,10 +19,13 @@ import dagger.hilt.components.SingletonComponent
 object RepositoryModule {
 
     @Provides
-    fun providesBookRepository(bookApi: BookApi): BookRepository = BookRepository(bookApi)
+    fun providesBookRepository(
+        bookApi: BookApi,
+        @ApplicationContext context: Context
+    ): BookRepository = BookRepository(bookApi, context)
 
     @Provides
-    fun providesMobileToPhoneCommunicator(@ApplicationContext context: Context): MobileToWearComunicator{
+    fun providesMobileToPhoneCommunicator(@ApplicationContext context: Context): MobileToWearComunicator {
         return MobileToWearComunicator(context)
     }
 }

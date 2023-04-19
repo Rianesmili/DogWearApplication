@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.Screen.SEND_AUTHOR_INTENT_ACTION_KEY
 import com.example.myapplication.Screen.SEND_AUTHOR_INTENT_PUT_EXTRA_KEY
+import com.example.webService.DogImage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -78,6 +79,7 @@ class MainActivity : AppCompatActivity() {
             }
 
 
+            val dogImage = DogImage(message = "", status = "")
         }
     }
 }

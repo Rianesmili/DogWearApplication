@@ -20,10 +20,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        viewModel.sendAuthorsLocally()
 
         setContent {
             AuthorsListView()
         }
+
+
 
     }
 
@@ -40,11 +43,6 @@ class MainActivity : ComponentActivity() {
         registerReceiver(broadcastReceiver, IntentFilter(SEND_RANDOM_AUTHOR_ACTION_KEY))
     }
 
-    override fun onPause() {
-        super.onPause()
-        unregisterReceiver(broadcastReceiver)
-
-    }
 
     override fun onStop() {
         super.onStop()

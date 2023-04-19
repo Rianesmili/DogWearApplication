@@ -1,5 +1,7 @@
 package com.example.bookmobileapp
 
+import android.app.Activity
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,10 +18,16 @@ class MainViewModel @Inject constructor(
 
     fun sendRandomAuthorToWear() {
         viewModelScope.launch(Dispatchers.IO) {
-            val bookAuthors = bookRepository.getAuthors()
+            val bookAuthors = bookRepository.getAuthorsAndSaveThemLocally()
             val author = bookAuthors?.authors?.random().orEmpty()
             mobileToWearComunicator.sendAuthorToWear(author)
             println("Auteur envoyé depuis le telephone: $author")
+        }
+    }
+
+    fun sendAuthorsLocally(){
+        viewModelScope.launch(Dispatchers.IO) {
+            println("here is the body of json ${bookRepository.getAuthorsLocally()}")
         }
     }
 
