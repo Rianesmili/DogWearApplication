@@ -77,9 +77,6 @@ class MainActivity : AppCompatActivity() {
                     Text("Rafraichir")
                 }
             }
-
-
-            val dogImage = DogImage(message = "", status = "")
         }
     }
 }

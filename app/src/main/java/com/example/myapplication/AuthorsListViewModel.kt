@@ -3,6 +3,7 @@ package com.example.myapplication
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.Screen.ASK_NEW_RANDOM_AUTHOR_KEY
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +30,7 @@ class AuthorsListViewModel @Inject constructor(
     }
     fun askNewRandomAuthor(wearToPhoneCommunicator: WearToPhoneCommunicator){
         viewModelScope.launch(Dispatchers.IO) {
-            wearToPhoneCommunicator.sendMessageToMobile("ask_send_random_author", byteArrayOf())
+            wearToPhoneCommunicator.sendMessageToMobile(ASK_NEW_RANDOM_AUTHOR_KEY, byteArrayOf())
         }
     }
 

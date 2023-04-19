@@ -11,5 +11,8 @@ object Screen{
     const val SEND_AUTHOR_INTENT_PUT_EXTRA_KEY = "selected_author_key"
     const val SEND_AUTHOR_INTENT_ACTION_KEY = "selected_author"
 
+    const val ASK_NEW_RANDOM_AUTHOR_KEY = "ask_send_random_author"
+
+
 
 }

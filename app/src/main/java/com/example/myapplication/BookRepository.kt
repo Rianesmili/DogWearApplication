@@ -1,7 +1,7 @@
 package com.example.myapplication
 
-import com.example.webService.BookAuthors
 import com.example.webService.BookApi
+import com.example.webService.BookAuthors
 
 class BookRepository (private val bookApi: BookApi) {
 

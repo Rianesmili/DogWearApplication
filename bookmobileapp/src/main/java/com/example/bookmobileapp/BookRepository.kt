@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.provider.Settings.Global.getString
+import com.example.bookmobileapp.Screen.GET_LIST_AUTHOR_FROM_SHARED_PREFERENCES_KEY
+import com.example.bookmobileapp.Screen.SHARED_PREFERENCES_NAME_KEY
 import com.example.bookmobileapp.webService.BookApi
 import com.example.bookmobileapp.webService.BookAuthors
 import com.google.gson.Gson
@@ -20,18 +22,20 @@ class BookRepository (private val bookApi: BookApi, private val context: Context
 
     fun saveAuthors(authors: List<String>){
 
-        val sharedPref = context.getSharedPreferences("shared_pref_key", Context.MODE_PRIVATE)
+        val sharedPref = context.getSharedPreferences(SHARED_PREFERENCES_NAME_KEY, Context.MODE_PRIVATE)
+
         with (sharedPref.edit()) {
-            putString("liste_authors", Gson().toJson(authors))
+            putString(GET_LIST_AUTHOR_FROM_SHARED_PREFERENCES_KEY, Gson().toJson(authors))
             apply()
         }
-        val listeAuthorsSharedPreferences = sharedPref.getString("liste_authors", "")
-        println("saveAuthor fun in bookRepository: $listeAuthorsSharedPreferences")
+        val listeAuthorsSharedPreferences = sharedPref.getString(GET_LIST_AUTHOR_FROM_SHARED_PREFERENCES_KEY, "")
     }
 
     fun getAuthorsLocally(): List<String> {
-        val sharedPref = context.getSharedPreferences("shared_pref_key", Context.MODE_PRIVATE) ?: return emptyList()
-        val listeAuthorsSharedPreferences = sharedPref.getString("liste_authors", "")
+
+        val sharedPref = context.getSharedPreferences(SHARED_PREFERENCES_NAME_KEY, Context.MODE_PRIVATE) ?: return emptyList()
+
+        val listeAuthorsSharedPreferences = sharedPref.getString(GET_LIST_AUTHOR_FROM_SHARED_PREFERENCES_KEY, "")
 
         return if (listeAuthorsSharedPreferences.isNullOrEmpty()) {
             emptyList()

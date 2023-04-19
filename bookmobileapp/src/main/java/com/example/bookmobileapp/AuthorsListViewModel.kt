@@ -7,7 +7,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.random.Random
 
 
 @HiltViewModel
@@ -16,22 +15,16 @@ class AuthorsListViewModel @Inject constructor(
     val mobileToPhoneCommunicator: MobileToWearComunicator
 ) : ViewModel() {
 
-    val authorLiveData = MutableLiveData<String>("Hello")
     val bookAuthorsLiveData = MutableLiveData<List<String>>()
 
     fun getAllBookAuthors() {
         viewModelScope.launch(Dispatchers.IO) {
-            val bookAuthors = bookRepository.getAuthors()
-
+            val bookAuthors = bookRepository.getAuthorsAndSaveThemLocally()
             bookAuthors?.authors?.take(5)
             bookAuthorsLiveData.postValue(bookAuthors?.authors?.take(5) ?: emptyList())
         }
     }
 
-
-    fun updateAuthor (author: String){
-        authorLiveData.value = author
-    }
 
 
 }

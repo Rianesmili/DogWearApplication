@@ -1,9 +1,9 @@
 package com.example.myapplication.di
 
-import com.example.myapplication.WearToPhoneCommunicator
 import android.content.Context
 import com.example.myapplication.BookRepository
 import com.example.myapplication.DogRepository
+import com.example.myapplication.WearToPhoneCommunicator
 import com.example.webService.BookApi
 import com.example.webService.DogApi
 import dagger.Module
