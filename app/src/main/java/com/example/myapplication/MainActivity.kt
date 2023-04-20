@@ -36,11 +36,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DisplaySelectedAthorView(wearToPhoneCommunicator)
+            SegmentListView()
+            //DisplaySelectedAthorView(wearToPhoneCommunicator)
         }
     }
-
-    override fun onStop() {
+/*
+  override fun onStop() {
         super.onStop()
         unregisterReceiver(broadcastReceiver)
     }
@@ -79,4 +80,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+ */
+
 }
